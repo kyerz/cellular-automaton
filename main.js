@@ -1,6 +1,9 @@
-const rows = 20;
-const cols = 20;
+let rows = 15;
+let cols = 23;
+const MIN_SIZE = 5;
+const MAX_SIZE = 35;
 
+//create grid with ID and dead class for td
 function createTable() {
   const gridContainer = document.querySelector('#gridContainer');
 
@@ -22,6 +25,29 @@ function createTable() {
 }
 
 function initialize() {
+  createTable();
+  setupRangeSizeRulerBtn();
+  setupControlButtons();
+}
+
+function setupRangeSizeRulerBtn() {
+  const sizeRuler = document.querySelector('#sizeRuler');
+  sizeRuler.setAttribute('min', MIN_SIZE);
+  sizeRuler.setAttribute('max', MAX_SIZE);
+}
+
+//setup listener all buttons menu
+function setupControlButtons() {
+  const sizeRuler = document.querySelector('#sizeRuler');
+  sizeRuler.addEventListener('click', updateGridSize);
+}
+
+//update grid size with size ruler input
+function updateGridSize(e) {
+  const newSize = parseInt(e.target.value);
+  rows = newSize;
+  cols = Math.round(newSize * 1.5);
+  document.querySelector('table').remove();
   createTable();
 }
 
