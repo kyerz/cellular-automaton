@@ -3,6 +3,8 @@ let cols = 23;
 const MIN_SIZE = 5;
 const MAX_SIZE = 35;
 
+let isPlaying = false;
+
 //create grid with ID and dead class for td
 function createTable() {
   const gridContainer = document.querySelector('#gridContainer');
@@ -40,16 +42,40 @@ function setupRangeSizeRulerBtn() {
 //setup listener all buttons menu
 function setupControlButtons() {
   const sizeRuler = document.querySelector('#sizeRuler');
-  sizeRuler.addEventListener('click', updateGridSize);
+  sizeRuler.addEventListener('click', updateGridSizeHandler);
+
+  const startBtn = document.querySelector('#start-btn');
+  startBtn.addEventListener('click', startButtonHandler);
+
+  const clearBtn = document.querySelector('#clear-btn');
+  clearBtn.addEventListener('click', clearButtonHandler);
 }
 
 //update grid size with size ruler input
-function updateGridSize(e) {
+function updateGridSizeHandler(e) {
   const newSize = parseInt(e.target.value);
   rows = newSize;
   cols = Math.round(newSize * 1.5);
   document.querySelector('table').remove();
   createTable();
+}
+
+function startButtonHandler(e) {
+  if (!isPlaying) {
+    e.target.textContent = 'Pause';
+    isPlaying = true;
+    console.log('start the game', isPlaying);
+  } else {
+    e.target.textContent = 'Continue';
+    isPlaying = false;
+    console.log('stop for a moment', isPlaying);
+  }
+}
+function clearButtonHandler() {
+  const startBtn = document.querySelector('#start-btn');
+  startBtn.textContent = 'Start';
+  isPlaying = false;
+  console.log(' clear the grid', isPlaying);
 }
 
 //live or dead cell on click
