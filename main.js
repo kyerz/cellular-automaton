@@ -21,4 +21,8 @@ function createTable() {
   gridContainer.appendChild(table);
 }
 
-createTable();
+function initialize() {
+  createTable();
+}
+
+window.onload = initialize();
