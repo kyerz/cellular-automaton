@@ -37,6 +37,10 @@ td {
   background-color: transparent;
 }
 
+.alive {
+  background-color: #fff;
+}
+
 /*MENU*/
 .start,
 .clear,

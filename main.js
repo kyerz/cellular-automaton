@@ -16,6 +16,7 @@ function createTable() {
       const td = document.createElement('td');
       td.setAttribute('class', 'dead');
       td.setAttribute('id', `${i}_${j}`);
+      td.addEventListener('click', cellClickHandler);
       tr.appendChild(td);
     }
     tbody.appendChild(tr);
@@ -49,6 +50,15 @@ function updateGridSize(e) {
   cols = Math.round(newSize * 1.5);
   document.querySelector('table').remove();
   createTable();
+}
+
+//live or dead cell on click
+function cellClickHandler(e) {
+  if (e.target.className === 'alive') {
+    e.target.setAttribute('class', 'dead');
+  } else {
+    e.target.setAttribute('class', 'alive');
+  }
 }
 
 window.onload = initialize();
