@@ -5,15 +5,26 @@
   padding: 0;
   /* box-sizing: border-box; */
 }
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 body {
   padding: 20px;
   background-color: #353535;
 }
 
+/*GRID*/
 table {
   border-spacing: 0px;
   border: 1px solid #797979;
   background-color: #aaa;
+  margin: 0 auto;
 }
 
 td {
@@ -24,4 +35,31 @@ td {
 
 .dead {
   background-color: transparent;
+}
+
+/*MENU*/
+.start,
+.clear,
+.random {
+  padding: 10px 15px;
+}
+
+.side-bar {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.grid-size {
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  background-color: #aaa;
+}
+
+.grid-size label {
+  margin-right: 5px;
+  color: #353535;
 }
