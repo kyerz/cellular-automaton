@@ -3,5 +3,25 @@
 ::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
+}
+body {
+  padding: 20px;
+  background-color: #353535;
+}
+
+table {
+  border-spacing: 0px;
+  border: 1px solid #797979;
+  background-color: #aaa;
+}
+
+td {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #797979;
+}
+
+.dead {
+  background-color: transparent;
 }
