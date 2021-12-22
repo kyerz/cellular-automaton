@@ -132,7 +132,7 @@ function setupControlButtons() {
   randomBtn.addEventListener('click', randomButtonHandler);
 
   const colorCellBtn = document.querySelector('#colorCell');
-  colorCellBtn.addEventListener('change', changeColorCellHandler);
+  colorCellBtn.addEventListener('input', changeColorCellHandler);
 
   const spacingBorderBtn = document.querySelector('.border-spacing-btn');
   spacingBorderBtn.addEventListener('click', borderSpacingHandler);
