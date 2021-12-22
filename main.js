@@ -142,20 +142,17 @@ function startButtonHandler(e) {
   if (!isPlaying) {
     e.target.textContent = 'Pause';
     isPlaying = true;
-    console.log('start the game', isPlaying);
     play();
   } else {
     e.target.textContent = 'Continue';
     isPlaying = false;
     clearTimeout(timer);
-    console.log('stop for a moment', isPlaying);
   }
 }
 function clearButtonHandler() {
   const startBtn = document.querySelector('#start-btn');
   startBtn.textContent = 'Start';
   isPlaying = false;
-  console.log(' clear the grid', isPlaying);
 
   const cellList = Array.from(document.querySelectorAll('.alive'));
   for (let i = 0; i < cellList.length; i++) {
@@ -181,7 +178,6 @@ function randomButtonHandler() {
       currentGrid[i][j] = status;
       if (status === 1) {
         cellsRemaining++;
-        console.log(cellsRemaining);
       }
     }
   }
