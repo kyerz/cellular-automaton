@@ -1,7 +1,8 @@
-let rows = 30;
-let cols = 51;
-const MIN_SIZE = 30;
-const MAX_SIZE = 50;
+//30 51
+let rows = 10;
+let cols = 10;
+const MIN_SIZE = 10;
+const MAX_SIZE = 10;
 
 let isPlaying = false;
 
@@ -59,20 +60,15 @@ function updateView() {
     for (let j = 0; j < cols; j++) {
       const cell = document.getElementById(`${i}_${j}`);
       if (currentGrid[i][j] === 1) {
-        cell.setAttribute('class', 'alive');
+        cell.classList.remove('dead');
+        cell.classList.add('alive');
         if (currentColorCell !== '#ffffff') {
           cell.style.backgroundColor = currentColorCell;
         }
       } else {
-        cell.setAttribute('class', 'dead');
+        cell.classList.remove('alive');
+        cell.classList.add('dead');
         cell.style.backgroundColor = '';
-      }
-      if (showBorder) {
-        cell.classList.add('show-border');
-      } else {
-        if (cell.classList.contains('show-border')) {
-          cell.classList.remove('show-border');
-        }
       }
     }
   }
@@ -242,16 +238,25 @@ function borderSpacingHandler(e) {
 //toggle show grid border
 function borderStatusHandler() {
   const borderStatus = document.querySelector('#border-status');
-  const tdList = Array.from(document.querySelectorAll('td'));
-  console.log(tdList.length);
   if (borderStatus.textContent === 'ON') {
     showBorder = false;
     borderStatus.textContent = 'OFF';
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        const cell = document.getElementById(`${i}_${j}`);
+        cell.classList.remove('show-border');
+      }
+    }
   } else {
     showBorder = true;
     borderStatus.textContent = 'ON';
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        const cell = document.getElementById(`${i}_${j}`);
+        cell.classList.add('show-border');
+      }
+    }
   }
-  updateView();
 }
 
 //live or dead cell on click
