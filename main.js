@@ -106,11 +106,54 @@ function clearButtonHandler() {
 
 //live or dead cell on click
 function cellClickHandler(e) {
+  const cellPosition = e.target.id.split('_');
+  const rowPosition = cellPosition[0];
+  const colPosition = cellPosition[1];
   if (e.target.className === 'alive') {
+    currentGrid[rowPosition][colPosition] = 0;
     e.target.setAttribute('class', 'dead');
   } else {
+    currentGrid[rowPosition][colPosition] = 1;
     e.target.setAttribute('class', 'alive');
   }
+}
+
+//count the neighbors around the cell
+function countNeighbors(row, col) {
+  let count = 0;
+  //up left
+  if (row - 1 >= 0 && col - 1 >= 0) {
+    if (currentGrid[row - 1][col - 1] === 1) count++;
+  }
+  //up center
+  if (row - 1 >= 0) {
+    if (currentGrid[row - 1][col] === 1) count++;
+  }
+  //up right
+  if (row - 1 >= 0 && col + 1 < cols) {
+    if (grid[row - 1][col + 1] === 1) count++;
+  }
+  //left
+  if (col - 1 >= 0) {
+    if (grid[row][col - 1] === 1) count++;
+  }
+  //right
+  if (col + 1 < cols) {
+    if (grid[row][col + 1] === 1) count++;
+  }
+  //bottom left
+  if (row + 1 < rows && col - 1 >= 0) {
+    if (grid[row + 1][col - 1] === 1) count++;
+  }
+  //bottom center
+  if (row + 1 < rows) {
+    if (grid[row + 1][col] === 1) count++;
+  }
+  //bottom right
+  if (row + 1 < rows && col + 1 < cols) {
+    if (grid[row + 1][col + 1] === 1) count++;
+  }
+  return count;
 }
 
 window.onload = initialize();
