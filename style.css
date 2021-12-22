@@ -22,7 +22,6 @@ body {
 
 /*GRID*/
 table {
-  /* border-spacing: 0px; */
   border: 1px solid white;
   box-shadow: 3px 2px 14px #000;
   background-image: linear-gradient(
@@ -48,9 +47,20 @@ td {
 }
 
 /*MENU*/
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-group > * {
+  margin-right: 5px;
+}
+
 .start,
 .clear,
-.random {
+.random,
+.border-spacing-btn {
   cursor: pointer;
   padding: 13px 15px;
   border: 1px solid #000;
@@ -61,13 +71,15 @@ td {
 
 .start:hover,
 .clear:hover,
-.random:hover {
+.random:hover,
+.border-spacing-btn:hover {
   background-color: #e58c8a;
 }
 
 .start:active,
 .clear:active,
-.random:active {
+.random:active,
+.border-spacing-btn:active {
   background-color: #f50568;
 }
 
@@ -85,7 +97,7 @@ td {
 
 .grid-size,
 .color-pick-container {
-  margin-left: 5px;
+  margin-right: 5px;
   border-radius: 5px;
   display: flex;
   align-items: center;

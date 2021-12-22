@@ -124,6 +124,9 @@ function setupControlButtons() {
 
   const colorCellBtn = document.querySelector('#colorCell');
   colorCellBtn.addEventListener('change', changeColorCellHandler);
+
+  const spacingBorderBtn = document.querySelector('.border-spacing-btn');
+  spacingBorderBtn.addEventListener('click', borderSpacingHandler);
 }
 
 //update grid size with size ruler input
@@ -204,9 +207,23 @@ function randomButtonHandler() {
   updateCellsRemaning(cellsRemaining);
 }
 
+//change cells color with picker color
 function changeColorCellHandler(e) {
   currentColorCell = e.target.value;
   updateView();
+}
+
+//change border spacing
+function borderSpacingHandler(e) {
+  const spacingStatus = document.querySelector('#spacing-status');
+  const table = document.querySelector('table');
+  if (spacingStatus.textContent === 'ON') {
+    spacingStatus.textContent = 'OFF';
+    table.style.borderSpacing = '0';
+  } else {
+    spacingStatus.textContent = 'ON';
+    table.style.borderSpacing = '2px';
+  }
 }
 
 //live or dead cell on click
