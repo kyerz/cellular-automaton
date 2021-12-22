@@ -118,6 +118,27 @@ function cellClickHandler(e) {
   }
 }
 
+// Si une cellule vivante est entourée de moins de 2 autres cellules elle meurt    ☠️ < 2
+// si une cellule vivante  est entourée de 2 ou 3 autres cellules elle survie
+// si une cellule vivante est entourée de plus de 3 autres cellules elle meurt     ☠️ > 3
+// si une cellule morte se retrouve entourée de 3 cellules vivantes, alors elle nait
+function applyRules(row, col) {
+  const totalNeighbors = countNeighbors();
+  if (grid[row][col] === 1) {
+    if (totalNeighbors < 2) {
+      nextGrid[row][col] = 0;
+    } else if (totalNeighbors === 2 || totalNeighbors === 3) {
+      nextGrid[row][col] = 1;
+    } else if (totalNeighbors > 3) {
+      nextGrid[row][col] = 0;
+    }
+  } else {
+    if (totalNeighbors === 3) {
+      nextGrid[row][col] = 1;
+    }
+  }
+}
+
 //count the neighbors around the cell
 function countNeighbors(row, col) {
   let count = 0;
