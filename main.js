@@ -91,6 +91,7 @@ function startButtonHandler(e) {
     e.target.textContent = 'Pause';
     isPlaying = true;
     console.log('start the game', isPlaying);
+    computeNexGeneration();
   } else {
     e.target.textContent = 'Continue';
     isPlaying = false;
@@ -118,13 +119,19 @@ function cellClickHandler(e) {
   }
 }
 
-// Si une cellule vivante est entourée de moins de 2 autres cellules elle meurt    ☠️ < 2
-// si une cellule vivante  est entourée de 2 ou 3 autres cellules elle survie
-// si une cellule vivante est entourée de plus de 3 autres cellules elle meurt     ☠️ > 3
-// si une cellule morte se retrouve entourée de 3 cellules vivantes, alors elle nait
+function computeNexGeneration() {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      applyRules(i, j);
+    }
+  }
+}
+
+//Apply the rules according to the number of neighbors
 function applyRules(row, col) {
-  const totalNeighbors = countNeighbors();
-  if (grid[row][col] === 1) {
+  const totalNeighbors = countNeighbors(row, col);
+  console.log(totalNeighbors);
+  if (currentGrid[row][col] === 1) {
     if (totalNeighbors < 2) {
       nextGrid[row][col] = 0;
     } else if (totalNeighbors === 2 || totalNeighbors === 3) {
@@ -152,27 +159,27 @@ function countNeighbors(row, col) {
   }
   //up right
   if (row - 1 >= 0 && col + 1 < cols) {
-    if (grid[row - 1][col + 1] === 1) count++;
+    if (currentGrid[row - 1][col + 1] === 1) count++;
   }
   //left
   if (col - 1 >= 0) {
-    if (grid[row][col - 1] === 1) count++;
+    if (currentGrid[row][col - 1] === 1) count++;
   }
   //right
   if (col + 1 < cols) {
-    if (grid[row][col + 1] === 1) count++;
+    if (currentGrid[row][col + 1] === 1) count++;
   }
   //bottom left
   if (row + 1 < rows && col - 1 >= 0) {
-    if (grid[row + 1][col - 1] === 1) count++;
+    if (currentGrid[row + 1][col - 1] === 1) count++;
   }
   //bottom center
   if (row + 1 < rows) {
-    if (grid[row + 1][col] === 1) count++;
+    if (currentGrid[row + 1][col] === 1) count++;
   }
   //bottom right
   if (row + 1 < rows && col + 1 < cols) {
-    if (grid[row + 1][col + 1] === 1) count++;
+    if (currentGrid[row + 1][col + 1] === 1) count++;
   }
   return count;
 }
