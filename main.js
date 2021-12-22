@@ -1,6 +1,6 @@
 let rows = 30;
-let cols = 50;
-const MIN_SIZE = 20;
+let cols = 51;
+const MIN_SIZE = 30;
 const MAX_SIZE = 50;
 
 let isPlaying = false;
