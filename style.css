@@ -35,6 +35,9 @@ table {
 td {
   width: 12px;
   height: 12px;
+}
+
+.show-border {
   border: 1px solid #ff008d;
 }
 
@@ -60,7 +63,8 @@ td {
 .start,
 .clear,
 .random,
-.border-spacing-btn {
+.border-spacing-btn,
+.border-btn {
   cursor: pointer;
   padding: 13px 15px;
   border: 1px solid #000;
@@ -72,14 +76,16 @@ td {
 .start:hover,
 .clear:hover,
 .random:hover,
-.border-spacing-btn:hover {
+.border-spacing-btn:hover,
+.border-btn:hover {
   background-color: #e58c8a;
 }
 
 .start:active,
 .clear:active,
 .random:active,
-.border-spacing-btn:active {
+.border-spacing-btn:active,
+.border-btn:active {
   background-color: #f50568;
 }
 
@@ -139,6 +145,10 @@ td {
 
 .color-cell-picker::-webkit-color-swatch {
   border-radius: 50%;
+}
+
+.border-spacing-btn {
+  margin-right: 5px;
 }
 
 .count-gen-wrap,

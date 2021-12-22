@@ -11,6 +11,7 @@ let generationCount = 0;
 let cellsRemaining = 0;
 
 let currentColorCell = '#ffffff';
+let showBorder = true;
 
 let currentGrid = new Array(rows);
 let nextGrid = new Array(rows);
@@ -66,6 +67,13 @@ function updateView() {
         cell.setAttribute('class', 'dead');
         cell.style.backgroundColor = '';
       }
+      if (showBorder) {
+        cell.classList.add('show-border');
+      } else {
+        if (cell.classList.contains('show-border')) {
+          cell.classList.remove('show-border');
+        }
+      }
     }
   }
 }
@@ -82,6 +90,7 @@ function createTable() {
     for (let j = 0; j < cols; j++) {
       const td = document.createElement('td');
       td.setAttribute('class', 'dead');
+      td.classList.add('show-border');
       td.setAttribute('id', `${i}_${j}`);
       td.addEventListener('click', cellClickHandler);
       tr.appendChild(td);
@@ -127,6 +136,9 @@ function setupControlButtons() {
 
   const spacingBorderBtn = document.querySelector('.border-spacing-btn');
   spacingBorderBtn.addEventListener('click', borderSpacingHandler);
+
+  const borderStatus = document.querySelector('.border-btn');
+  borderStatus.addEventListener('click', borderStatusHandler);
 }
 
 //update grid size with size ruler input
@@ -224,6 +236,21 @@ function borderSpacingHandler(e) {
     spacingStatus.textContent = 'ON';
     table.style.borderSpacing = '2px';
   }
+}
+
+//toggle show grid border
+function borderStatusHandler() {
+  const borderStatus = document.querySelector('#border-status');
+  const tdList = Array.from(document.querySelectorAll('td'));
+  console.log(tdList.length);
+  if (borderStatus.textContent === 'ON') {
+    showBorder = false;
+    borderStatus.textContent = 'OFF';
+  } else {
+    showBorder = true;
+    borderStatus.textContent = 'ON';
+  }
+  updateView();
 }
 
 //live or dead cell on click
