@@ -186,7 +186,8 @@ function clearButtonHandler() {
 
   const cellList = Array.from(document.querySelectorAll('.alive'));
   for (let i = 0; i < cellList.length; i++) {
-    cellList[i].setAttribute('class', 'dead');
+    cellList[i].classList.remove('alive');
+    cellList[i].classList.add('class', 'dead');
     cellList[i].style.backgroundColor = '';
   }
   resetGrids();
