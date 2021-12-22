@@ -6,7 +6,7 @@ const MAX_SIZE = 35;
 let isPlaying = false;
 
 let timer = null;
-const reproductionTime = 500;
+const reproductionTime = 100;
 
 let currentGrid = new Array(rows);
 let nextGrid = new Array(rows);
@@ -122,6 +122,7 @@ function startButtonHandler(e) {
   } else {
     e.target.textContent = 'Continue';
     isPlaying = false;
+    clearTimeout(timer);
     console.log('stop for a moment', isPlaying);
   }
 }
@@ -157,7 +158,7 @@ function play() {
   computeNexGeneration();
 
   if (isPlaying) {
-    // timer = setTimeout(play, reproductionTime);
+    timer = setTimeout(play, reproductionTime);
     updateView();
   }
 }
