@@ -5,6 +5,26 @@ const MAX_SIZE = 35;
 
 let isPlaying = false;
 
+let currentGrid = new Array(rows);
+let nextGrid = new Array(rows);
+
+//initialize currentGrid & nextGrid
+function initializeGrid() {
+  for (let i = 0; i < rows; i++) {
+    currentGrid[i] = new Array(cols);
+    nextGrid[i] = new Array(cols);
+  }
+}
+
+function resetGrids() {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      currentGrid[i][j] = 0;
+      nextGrid[i][j] = 0;
+    }
+  }
+}
+
 //create grid with ID and dead class for td
 function createTable() {
   const gridContainer = document.querySelector('#gridContainer');
@@ -29,6 +49,8 @@ function createTable() {
 
 function initialize() {
   createTable();
+  initializeGrid();
+  resetGrids();
   setupRangeSizeRulerBtn();
   setupControlButtons();
 }
@@ -58,6 +80,10 @@ function updateGridSizeHandler(e) {
   cols = Math.round(newSize * 1.5);
   document.querySelector('table').remove();
   createTable();
+  currentGrid = new Array(rows);
+  nextGrid = new Array(rows);
+  initializeGrid();
+  resetGrids();
 }
 
 function startButtonHandler(e) {
