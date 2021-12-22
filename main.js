@@ -7,6 +7,7 @@ let isPlaying = false;
 
 let timer = null;
 const reproductionTime = 100;
+let generationCount = 0;
 
 let currentGrid = new Array(rows);
 let nextGrid = new Array(rows);
@@ -36,6 +37,11 @@ function updateGrids() {
       nextGrid[i][j] = 0;
     }
   }
+}
+
+function updateCountGeneration(value) {
+  const counter = document.querySelector('#count');
+  counter.textContent = value;
 }
 
 //update view with new state
@@ -80,6 +86,7 @@ function initialize() {
   resetGrids();
   setupRangeSizeRulerBtn();
   setupControlButtons();
+  updateCountGeneration(generationCount);
 }
 
 function setupRangeSizeRulerBtn() {
@@ -114,6 +121,8 @@ function updateGridSizeHandler(e) {
   createTable();
   initializeGrid();
   resetGrids();
+  generationCount = 0;
+  updateCountGeneration(generationCount);
   document.querySelector('#start-btn').textContent = 'Start';
   isPlaying = false;
 }
@@ -142,6 +151,8 @@ function clearButtonHandler() {
     cellList[i].setAttribute('class', 'dead');
   }
   resetGrids();
+  generationCount = 0;
+  updateCountGeneration(generationCount);
 }
 
 function randomButtonHandler() {
@@ -155,6 +166,8 @@ function randomButtonHandler() {
     }
   }
   updateView();
+  generationCount = 0;
+  updateCountGeneration(generationCount);
 }
 
 //live or dead cell on click
@@ -175,6 +188,8 @@ function play() {
   computeNexGeneration();
 
   if (isPlaying) {
+    generationCount++;
+    updateCountGeneration(generationCount);
     timer = setTimeout(play, reproductionTime);
     updateView();
   }
