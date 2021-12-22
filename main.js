@@ -5,6 +5,9 @@ const MAX_SIZE = 35;
 
 let isPlaying = false;
 
+let timer = null;
+const reproductionTime = 500;
+
 let currentGrid = new Array(rows);
 let nextGrid = new Array(rows);
 
@@ -21,6 +24,30 @@ function resetGrids() {
     for (let j = 0; j < cols; j++) {
       currentGrid[i][j] = 0;
       nextGrid[i][j] = 0;
+    }
+  }
+}
+
+//copy nextGrid to grid & reset nextGrid for the next cycle
+function updateGrids() {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      currentGrid[i][j] = nextGrid[i][j];
+      nextGrid[i][j] = 0;
+    }
+  }
+}
+
+//update view with new state
+function updateView() {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const cell = document.getElementById(`${i}_${j}`);
+      if (currentGrid[i][j] === 1) {
+        cell.setAttribute('class', 'alive');
+      } else {
+        cell.setAttribute('class', 'dead');
+      }
     }
   }
 }
@@ -91,7 +118,7 @@ function startButtonHandler(e) {
     e.target.textContent = 'Pause';
     isPlaying = true;
     console.log('start the game', isPlaying);
-    computeNexGeneration();
+    play();
   } else {
     e.target.textContent = 'Continue';
     isPlaying = false;
@@ -119,12 +146,22 @@ function cellClickHandler(e) {
   }
 }
 
+function play() {
+  computeNexGeneration();
+
+  if (isPlaying) {
+    updateView();
+  }
+}
+
 function computeNexGeneration() {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       applyRules(i, j);
     }
   }
+  //copy nextgrid to grid & reset nextgrid
+  updateGrids();
 }
 
 //Apply the rules according to the number of neighbors
