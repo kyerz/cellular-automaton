@@ -10,6 +10,8 @@ const reproductionTime = 100;
 let generationCount = 0;
 let cellsRemaining = 0;
 
+let currentColorCell = '#ffffff';
+
 let currentGrid = new Array(rows);
 let nextGrid = new Array(rows);
 
@@ -57,8 +59,12 @@ function updateView() {
       const cell = document.getElementById(`${i}_${j}`);
       if (currentGrid[i][j] === 1) {
         cell.setAttribute('class', 'alive');
+        if (currentColorCell !== '#ffffff') {
+          cell.style.backgroundColor = currentColorCell;
+        }
       } else {
         cell.setAttribute('class', 'dead');
+        cell.style.backgroundColor = '';
       }
     }
   }
@@ -115,6 +121,9 @@ function setupControlButtons() {
 
   const randomBtn = document.querySelector('#random-btn');
   randomBtn.addEventListener('click', randomButtonHandler);
+
+  const colorCellBtn = document.querySelector('#colorCell');
+  colorCellBtn.addEventListener('change', changeColorCellHandler);
 }
 
 //update grid size with size ruler input
@@ -139,13 +148,16 @@ function updateGridSizeHandler(e) {
 }
 
 function startButtonHandler(e) {
+  const colorCellBtn = document.querySelector('#colorCell');
   if (!isPlaying) {
     e.target.textContent = 'Pause';
     isPlaying = true;
+    colorCellBtn.disabled = true;
     play();
   } else {
     e.target.textContent = 'Continue';
     isPlaying = false;
+    colorCellBtn.disabled = false;
     clearTimeout(timer);
   }
 }
@@ -157,6 +169,7 @@ function clearButtonHandler() {
   const cellList = Array.from(document.querySelectorAll('.alive'));
   for (let i = 0; i < cellList.length; i++) {
     cellList[i].setAttribute('class', 'dead');
+    cellList[i].style.backgroundColor = '';
   }
   resetGrids();
   generationCount = 0;
@@ -186,6 +199,11 @@ function randomButtonHandler() {
   updateCountGeneration(generationCount);
 
   updateCellsRemaning(cellsRemaining);
+}
+
+function changeColorCellHandler(e) {
+  currentColorCell = e.target.value;
+  updateView();
 }
 
 //live or dead cell on click
