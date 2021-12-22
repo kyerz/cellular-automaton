@@ -1,6 +1,6 @@
 let rows = 15;
 let cols = 23;
-const MIN_SIZE = 5;
+const MIN_SIZE = 10;
 const MAX_SIZE = 35;
 
 let isPlaying = false;
@@ -8,6 +8,7 @@ let isPlaying = false;
 let timer = null;
 const reproductionTime = 100;
 let generationCount = 0;
+let cellsRemaining = 0;
 
 let currentGrid = new Array(rows);
 let nextGrid = new Array(rows);
@@ -40,8 +41,13 @@ function updateGrids() {
 }
 
 function updateCountGeneration(value) {
-  const counter = document.querySelector('#count');
+  const counter = document.querySelector('#count-gen');
   counter.textContent = value;
+}
+
+function updateCellsRemaning(value) {
+  const countCells = document.querySelector('#count-cells');
+  countCells.textContent = value;
 }
 
 //update view with new state
@@ -86,6 +92,7 @@ function initialize() {
   resetGrids();
   setupRangeSizeRulerBtn();
   setupControlButtons();
+  updateCellsRemaning(cellsRemaining);
   updateCountGeneration(generationCount);
 }
 
@@ -123,6 +130,10 @@ function updateGridSizeHandler(e) {
   resetGrids();
   generationCount = 0;
   updateCountGeneration(generationCount);
+
+  cellsRemaining = 0;
+  updateCellsRemaning(cellsRemaining);
+
   document.querySelector('#start-btn').textContent = 'Start';
   isPlaying = false;
 }
@@ -153,21 +164,32 @@ function clearButtonHandler() {
   resetGrids();
   generationCount = 0;
   updateCountGeneration(generationCount);
+  cellsRemaining = 0;
+  updateCellsRemaning(cellsRemaining);
 }
 
 function randomButtonHandler() {
   if (isPlaying) {
     clearButtonHandler();
   }
+
+  cellsRemaining = 0;
+
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const status = Math.round(Math.random());
       currentGrid[i][j] = status;
+      if (status === 1) {
+        cellsRemaining++;
+        console.log(cellsRemaining);
+      }
     }
   }
   updateView();
   generationCount = 0;
   updateCountGeneration(generationCount);
+
+  updateCellsRemaning(cellsRemaining);
 }
 
 //live or dead cell on click
@@ -178,18 +200,26 @@ function cellClickHandler(e) {
   if (e.target.className === 'alive') {
     currentGrid[rowPosition][colPosition] = 0;
     e.target.setAttribute('class', 'dead');
+
+    cellsRemaining--;
+    updateCellsRemaning(cellsRemaining);
   } else {
     currentGrid[rowPosition][colPosition] = 1;
     e.target.setAttribute('class', 'alive');
+
+    cellsRemaining++;
+    updateCellsRemaning(cellsRemaining);
   }
 }
 
 function play() {
+  cellsRemaining = 0;
   computeNexGeneration();
 
   if (isPlaying) {
     generationCount++;
     updateCountGeneration(generationCount);
+    updateCellsRemaning(cellsRemaining);
     timer = setTimeout(play, reproductionTime);
     updateView();
   }
@@ -213,12 +243,14 @@ function applyRules(row, col) {
       nextGrid[row][col] = 0;
     } else if (totalNeighbors === 2 || totalNeighbors === 3) {
       nextGrid[row][col] = 1;
+      cellsRemaining++;
     } else if (totalNeighbors > 3) {
       nextGrid[row][col] = 0;
     }
   } else {
     if (totalNeighbors === 3) {
       nextGrid[row][col] = 1;
+      cellsRemaining++;
     }
   }
 }
