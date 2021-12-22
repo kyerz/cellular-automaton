@@ -1,8 +1,7 @@
-//30 51
-let rows = 10;
-let cols = 10;
-const MIN_SIZE = 10;
-const MAX_SIZE = 10;
+let rows = 30;
+let cols = 51;
+const MIN_SIZE = 30;
+const MAX_SIZE = 51;
 
 let isPlaying = false;
 
@@ -128,7 +127,7 @@ function setupControlButtons() {
   randomBtn.addEventListener('click', randomButtonHandler);
 
   const colorCellBtn = document.querySelector('#colorCell');
-  colorCellBtn.addEventListener('input', changeColorCellHandler);
+  colorCellBtn.addEventListener('change', changeColorCellHandler);
 
   const spacingBorderBtn = document.querySelector('.border-spacing-btn');
   spacingBorderBtn.addEventListener('click', borderSpacingHandler);
