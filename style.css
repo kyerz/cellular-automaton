@@ -17,10 +17,7 @@
 body {
   padding: 20px;
   height: 100vh;
-  background: #2f2cb2;
-  background: -webkit-linear-gradient(top, #2f2cb2, #d422fe);
-  background: -moz-linear-gradient(top, #2f2cb2, #d422fe);
-  background: linear-gradient(to bottom, #2f2cb2, #d422fe);
+  background-image: linear-gradient(180deg, #eec0c6 0%, #e58c8a 74%);
 }
 
 /*GRID*/
@@ -66,14 +63,20 @@ td {
   padding: 11px 15px;
   border: 1px solid #000;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #282828;
+  color: #fff;
 }
 
 .start:hover,
 .clear:hover,
 .random:hover {
-  background-color: #ff7ad0;
-  color: #fff;
+  background-color: #e58c8a;
+}
+
+.start:active,
+.clear:active,
+.random:active {
+  background-color: #f50568;
 }
 
 .menu {
@@ -83,7 +86,8 @@ td {
   bottom: 0px;
   width: 100%;
   justify-content: center;
-  background-color: rgb(69 0 255 / 60%);
+  background-color: #ffffff;
+  opacity: 0.9;
   padding: 30px;
 }
 
@@ -93,13 +97,13 @@ td {
   border-radius: 5px;
   display: flex;
   align-items: center;
-  background-color: #fff;
   border: 1px solid #000;
+  background-color: #282828;
 }
 
 .grid-size label {
   margin-right: 5px;
-  color: #353535;
+  color: #ffffff;
 }
 
 .count-gen-wrap,
