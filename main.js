@@ -130,6 +130,13 @@ function clearButtonHandler() {
   startBtn.textContent = 'Start';
   isPlaying = false;
   console.log(' clear the grid', isPlaying);
+
+  const cellList = Array.from(document.querySelectorAll('.alive'));
+  console.log(cellList);
+  for (let i = 0; i < cellList.length; i++) {
+    cellList[i].setAttribute('class', 'dead');
+  }
+  resetGrids();
 }
 
 //live or dead cell on click
@@ -150,6 +157,7 @@ function play() {
   computeNexGeneration();
 
   if (isPlaying) {
+    // timer = setTimeout(play, reproductionTime);
     updateView();
   }
 }
