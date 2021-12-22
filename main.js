@@ -272,6 +272,12 @@ function cellClickHandler(e) {
   } else {
     currentGrid[rowPosition][colPosition] = 1;
     e.target.setAttribute('class', 'alive');
+    if (currentColorCell !== '#ffffff') {
+      e.target.style.backgroundColor = currentColorCell;
+      if (showBorder) {
+        e.target.classList.add('show-border');
+      }
+    }
 
     cellsRemaining++;
     updateCellsRemaning(cellsRemaining);
