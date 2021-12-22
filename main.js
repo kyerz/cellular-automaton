@@ -98,6 +98,9 @@ function setupControlButtons() {
 
   const clearBtn = document.querySelector('#clear-btn');
   clearBtn.addEventListener('click', clearButtonHandler);
+
+  const randomBtn = document.querySelector('#random-btn');
+  randomBtn.addEventListener('click', randomButtonHandler);
 }
 
 //update grid size with size ruler input
@@ -139,6 +142,19 @@ function clearButtonHandler() {
     cellList[i].setAttribute('class', 'dead');
   }
   resetGrids();
+}
+
+function randomButtonHandler() {
+  if (isPlaying) {
+    clearButtonHandler();
+  }
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const status = Math.round(Math.random());
+      currentGrid[i][j] = status;
+    }
+  }
+  updateView();
 }
 
 //live or dead cell on click
