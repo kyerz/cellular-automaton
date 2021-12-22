@@ -1,6 +1,6 @@
 let rows = 30;
 let cols = 50;
-const MIN_SIZE = 10;
+const MIN_SIZE = 20;
 const MAX_SIZE = 50;
 
 let isPlaying = false;
@@ -121,7 +121,7 @@ function setupControlButtons() {
 function updateGridSizeHandler(e) {
   const newSize = parseInt(e.target.value);
   rows = newSize;
-  cols = Math.round(newSize * 2.5);
+  cols = Math.round(newSize * 1.7);
   currentGrid = new Array(rows);
   nextGrid = new Array(rows);
   document.querySelector('table').remove();
