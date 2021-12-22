@@ -105,12 +105,14 @@ function updateGridSizeHandler(e) {
   const newSize = parseInt(e.target.value);
   rows = newSize;
   cols = Math.round(newSize * 1.5);
-  document.querySelector('table').remove();
-  createTable();
   currentGrid = new Array(rows);
   nextGrid = new Array(rows);
+  document.querySelector('table').remove();
+  createTable();
   initializeGrid();
   resetGrids();
+  document.querySelector('#start-btn').textContent = 'Start';
+  isPlaying = false;
 }
 
 function startButtonHandler(e) {
@@ -133,7 +135,6 @@ function clearButtonHandler() {
   console.log(' clear the grid', isPlaying);
 
   const cellList = Array.from(document.querySelectorAll('.alive'));
-  console.log(cellList);
   for (let i = 0; i < cellList.length; i++) {
     cellList[i].setAttribute('class', 'dead');
   }
@@ -176,7 +177,6 @@ function computeNexGeneration() {
 //Apply the rules according to the number of neighbors
 function applyRules(row, col) {
   const totalNeighbors = countNeighbors(row, col);
-  console.log(totalNeighbors);
   if (currentGrid[row][col] === 1) {
     if (totalNeighbors < 2) {
       nextGrid[row][col] = 0;
