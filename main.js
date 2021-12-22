@@ -149,15 +149,18 @@ function updateGridSizeHandler(e) {
 
 function startButtonHandler(e) {
   const colorCellBtn = document.querySelector('#colorCell');
+  const colorPickCtn = document.querySelector('.color-pick-container');
   if (!isPlaying) {
     e.target.textContent = 'Pause';
     isPlaying = true;
     colorCellBtn.disabled = true;
+    colorPickCtn.style.opacity = 0.5;
     play();
   } else {
     e.target.textContent = 'Continue';
     isPlaying = false;
     colorCellBtn.disabled = false;
+    colorPickCtn.style.opacity = 1;
     clearTimeout(timer);
   }
 }
