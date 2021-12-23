@@ -4,6 +4,7 @@ const MIN_SIZE = 30;
 const MAX_SIZE = 51;
 
 let isPlaying = false;
+let isRezising = false;
 
 let timer = null;
 const reproductionTime = 100;
@@ -63,6 +64,8 @@ function updateView() {
         cell.classList.add('alive');
         if (currentColorCell !== '#ffffff') {
           cell.style.backgroundColor = currentColorCell;
+        } else {
+          cell.style.backgroundColor = '';
         }
       } else {
         cell.classList.remove('alive');
@@ -155,8 +158,11 @@ function updateGridSizeHandler(e) {
 
   document.querySelector('#start-btn').textContent = 'Start';
   isPlaying = false;
+  isRezising = true;
+  borderSpacingHandler();
 }
 
+//start or pause iteration
 function startButtonHandler(e) {
   const colorCellBtn = document.querySelector('#colorCell');
   const colorPickCtn = document.querySelector('.color-pick-container');
@@ -174,6 +180,8 @@ function startButtonHandler(e) {
     clearTimeout(timer);
   }
 }
+
+//clear & reset grid
 function clearButtonHandler() {
   const startBtn = document.querySelector('#start-btn');
   startBtn.textContent = 'Start';
@@ -190,8 +198,14 @@ function clearButtonHandler() {
   updateCountGeneration(generationCount);
   cellsRemaining = 0;
   updateCellsRemaning(cellsRemaining);
+
+  const colorCellBtn = document.querySelector('#colorCell');
+  const colorPickCtn = document.querySelector('.color-pick-container');
+  colorCellBtn.disabled = false;
+  colorPickCtn.style.opacity = 1;
 }
 
+//fill in a new grid randomly
 function randomButtonHandler() {
   if (isPlaying) {
     clearButtonHandler();
@@ -211,7 +225,6 @@ function randomButtonHandler() {
   updateView();
   generationCount = 0;
   updateCountGeneration(generationCount);
-
   updateCellsRemaning(cellsRemaining);
 }
 
@@ -225,9 +238,15 @@ function changeColorCellHandler(e) {
 function borderSpacingHandler(e) {
   const spacingStatus = document.querySelector('#spacing-status');
   const table = document.querySelector('table');
-  if (spacingStatus.textContent === 'ON') {
+  if (spacingStatus.textContent === 'ON' && isRezising === false) {
     spacingStatus.textContent = 'OFF';
     table.style.borderSpacing = '0';
+  } else if (spacingStatus.textContent === 'ON' && isRezising === true) {
+    table.style.borderSpacing = '2';
+    isRezising = false;
+  } else if (spacingStatus.textContent === 'OFF' && isRezising === true) {
+    table.style.borderSpacing = '0';
+    isRezising = false;
   } else {
     spacingStatus.textContent = 'ON';
     table.style.borderSpacing = '2px';
@@ -263,25 +282,23 @@ function cellClickHandler(e) {
   const cellPosition = e.target.id.split('_');
   const rowPosition = cellPosition[0];
   const colPosition = cellPosition[1];
-  if (e.target.className === 'alive') {
+
+  if (e.target.classList.contains('alive')) {
     currentGrid[rowPosition][colPosition] = 0;
-    e.target.setAttribute('class', 'dead');
+    e.target.classList.remove('alive');
+    e.target.classList.add('dead');
 
     cellsRemaining--;
     updateCellsRemaning(cellsRemaining);
   } else {
     currentGrid[rowPosition][colPosition] = 1;
-    e.target.setAttribute('class', 'alive');
-    if (currentColorCell !== '#ffffff') {
-      e.target.style.backgroundColor = currentColorCell;
-      if (showBorder) {
-        e.target.classList.add('show-border');
-      }
-    }
+    e.target.classList.remove('dead');
+    e.target.classList.add('alive');
 
     cellsRemaining++;
     updateCellsRemaning(cellsRemaining);
   }
+  updateView();
 }
 
 function play() {
