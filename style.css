@@ -102,6 +102,7 @@ td {
 }
 
 .grid-size,
+.speed-ruler,
 .color-pick-container {
   margin-right: 5px;
   border-radius: 5px;
@@ -111,11 +112,13 @@ td {
   background-color: #282828;
 }
 
-.grid-size {
+.grid-size,
+.speed-ruler {
   padding: 13px;
 }
 
 .grid-size label,
+.speed-ruler label,
 .color-cell-picker label {
   margin-right: 5px;
   color: #fff;
@@ -147,12 +150,14 @@ td {
   border-radius: 50%;
 }
 
-.border-spacing-btn {
+.border-spacing-btn,
+.speed-container {
   margin-right: 5px;
 }
 
 .count-gen-wrap,
-.count-cell-wrap {
+.count-cell-wrap,
+.show-speed-wrap {
   margin-left: 10px;
   text-align: center;
   border: 1px solid #000;
@@ -165,16 +170,27 @@ td {
 
 .count-gen-wrap {
   position: absolute;
-  left: 60%;
+  left: 50%;
   top: 85%;
   transform: translate(-50%, -50%);
 }
 
 .count-cell-wrap {
   position: absolute;
-  left: 40%;
+  left: 30%;
   top: 85%;
   transform: translate(-50%, -50%);
+}
+
+.show-speed-wrap {
+  position: absolute;
+  left: 70%;
+  top: 85%;
+  transform: translate(-50%, -50%);
+}
+
+.show-speed-wrap span {
+  font-weight: bold;
 }
 
 .count-gen-wrap span,

@@ -23,6 +23,9 @@
         <div class="count-cell-wrap">
           <p>living cells remaining: <span id="count-cells"></span></p>
         </div>
+        <div class="show-speed-wrap">
+          <p>Iteration Speed: <span id="showSpeed"></span> Ms</p>
+        </div>
       </div>
 
       <div class="menu">
@@ -62,10 +65,22 @@
             Border spacing: <span id="spacing-status">ON</span>
           </button>
         </div>
-        <div>
+        <div class="speed-container">
           <button class="border-btn">
             Border: <span id="border-status">ON</span>
           </button>
+        </div>
+        <div class="speed-ruler">
+          <label for="speed">Speed:</label>
+          <input
+            type="range"
+            id="speed"
+            name="speed"
+            min="100"
+            max="1000"
+            step="100"
+            value="1000"
+          />
         </div>
       </div>
     </div>

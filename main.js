@@ -7,7 +7,7 @@ let isPlaying = false;
 let isRezising = false;
 
 let timer = null;
-const reproductionTime = 100;
+let reproductionTime = 100;
 let generationCount = 0;
 let cellsRemaining = 0;
 
@@ -52,6 +52,12 @@ function updateCountGeneration(value) {
 function updateCellsRemaning(value) {
   const countCells = document.querySelector('#count-cells');
   countCells.textContent = value;
+}
+
+//initialize speed generation
+function initializeSpeedRuler() {
+  const speed = document.querySelector('#showSpeed');
+  speed.innerHTML = reproductionTime;
 }
 
 //update view with new state
@@ -103,6 +109,7 @@ function initialize() {
   createTable();
   initializeGrid();
   resetGrids();
+  initializeSpeedRuler();
   setupRangeSizeRulerBtn();
   setupControlButtons();
   updateCellsRemaning(cellsRemaining);
@@ -137,6 +144,9 @@ function setupControlButtons() {
 
   const borderStatus = document.querySelector('.border-btn');
   borderStatus.addEventListener('click', borderStatusHandler);
+
+  const speedRuler = document.querySelector('#speed');
+  speedRuler.addEventListener('input', speedRulerHandler);
 }
 
 //update grid size with size ruler input
@@ -290,6 +300,20 @@ function borderStatusHandler() {
       }
     }
   }
+}
+
+//set the iteration speed in milliseconds
+function speedRulerHandler(e) {
+  const speedRuler = document.querySelector('#showSpeed');
+  const selectedSpeed = parseInt(e.target.value);
+  if (selectedSpeed === 100) {
+    reproductionTime = 1000;
+  } else if (selectedSpeed === 1000) {
+    reproductionTime = 100;
+  } else {
+    reproductionTime = 1000 - selectedSpeed + 100;
+  }
+  speedRuler.innerHTML = reproductionTime;
 }
 
 //live or dead cell on click
