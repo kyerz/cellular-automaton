@@ -244,7 +244,11 @@ function borderSpacingHandler(e) {
   } else if (spacingStatus.textContent === 'ON' && isRezising === true) {
     table.style.borderSpacing = '2';
     isRezising = false;
-  } else if (spacingStatus.textContent === 'OFF' && isRezising === true) {
+  } else if (spacingStatus.textContent === 'OFF' && isRezising && !showBorder) {
+    table.style.borderSpacing = '0';
+    isRezising = false;
+    borderStatusHandler();
+  } else if (spacingStatus.textContent === 'OFF' && isRezising) {
     table.style.borderSpacing = '0';
     isRezising = false;
   } else {
@@ -255,6 +259,8 @@ function borderSpacingHandler(e) {
 
 //toggle show grid border
 function borderStatusHandler() {
+  const borderSpacingBtn = document.querySelector('.border-spacing-btn');
+
   const borderStatus = document.querySelector('#border-status');
   if (borderStatus.textContent === 'ON') {
     showBorder = false;
@@ -265,7 +271,16 @@ function borderStatusHandler() {
         cell.classList.remove('show-border');
       }
     }
+
+    const spacingStatus = document.querySelector('#spacing-status');
+    const table = document.querySelector('table');
+    spacingStatus.textContent = 'OFF';
+    table.style.borderSpacing = '0';
+    borderSpacingBtn.disabled = true;
+    borderSpacingBtn.style.opacity = 0.5;
   } else {
+    borderSpacingBtn.disabled = false;
+    borderSpacingBtn.style.opacity = 1;
     showBorder = true;
     borderStatus.textContent = 'ON';
     for (let i = 0; i < rows; i++) {
