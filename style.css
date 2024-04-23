@@ -17,7 +17,9 @@
 body {
   padding: 20px;
   height: 100vh;
-  background-image: linear-gradient(180deg, #eec0c6 0%, #e58c8a 74%);
+  background: #4b6cb7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /*GRID*/
