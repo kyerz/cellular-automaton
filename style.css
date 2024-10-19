@@ -11,18 +11,15 @@
 .wrapper {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
 }
 
 body {
-  padding: 20px;
+  padding-top: 20px;
   height: 100vh;
   background: #4b6cb7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #182848,
-    #4b6cb7
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to bottom, #182848, #4b6cb7); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to bottom,
     #182848,
@@ -30,15 +27,14 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.grid-container {
+  margin: 0 auto;
+}
+
 /*GRID*/
 table {
   border: 1px solid white;
-  background-image: linear-gradient(
-    -225deg,
-    #a445b2 0%,
-    #d41872 52%,
-    #ff0066 100%
-  );
+  background-image: linear-gradient(-225deg, #a445b2 0%, #d41872 52%, #ff0066 100%);
 }
 
 td {
@@ -100,6 +96,7 @@ td {
 
 .menu {
   display: flex;
+  flex-direction: column;
   align-items: center;
   position: absolute;
   bottom: 0px;
@@ -108,6 +105,32 @@ td {
   background-color: #ffffff;
   opacity: 0.9;
   padding: 30px;
+}
+
+.menu-top {
+  margin-bottom: 15px;
+}
+
+.menu-bottom {
+  display: flex;
+}
+
+.grid-size {
+  max-width: 20%;
+}
+#sizeRuler {
+  max-width: 60%;
+}
+
+.speed-ruler {
+  max-width: 20%;
+}
+#speed {
+  max-width: 60%;
+}
+
+.menu button {
+  padding: 23px 15px;
 }
 
 .grid-size,
@@ -164,6 +187,12 @@ td {
   margin-right: 5px;
 }
 
+.cells-status {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
 .count-gen-wrap,
 .count-cell-wrap,
 .show-speed-wrap {
@@ -178,24 +207,12 @@ td {
 }
 
 .count-gen-wrap {
-  position: absolute;
-  left: 50%;
-  top: 85%;
-  transform: translate(-50%, -50%);
 }
 
 .count-cell-wrap {
-  position: absolute;
-  left: 30%;
-  top: 85%;
-  transform: translate(-50%, -50%);
 }
 
 .show-speed-wrap {
-  position: absolute;
-  left: 70%;
-  top: 85%;
-  transform: translate(-50%, -50%);
 }
 
 .show-speed-wrap span {
@@ -205,4 +222,9 @@ td {
 .count-gen-wrap span,
 .count-cell-wrap span {
   font-weight: bold;
+}
+
+@media screen and (max-width: 1310px) {
+  .menu * {
+  }
 }

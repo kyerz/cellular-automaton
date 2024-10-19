@@ -1,7 +1,7 @@
 let rows = 30;
 let cols = 51;
 const MIN_SIZE = 30;
-const MAX_SIZE = 51;
+const MAX_SIZE = 35;
 
 let isPlaying = false;
 let isRezising = false;
@@ -11,7 +11,7 @@ let reproductionTime = 100;
 let generationCount = 0;
 let cellsRemaining = 0;
 
-let currentColorCell = '#ffffff';
+let currentColorCell = "#ffffff";
 let showBorder = true;
 
 let currentGrid = new Array(rows);
@@ -45,18 +45,18 @@ function updateGrids() {
 }
 
 function updateCountGeneration(value) {
-  const counter = document.querySelector('#count-gen');
+  const counter = document.querySelector("#count-gen");
   counter.textContent = value;
 }
 
 function updateCellsRemaning(value) {
-  const countCells = document.querySelector('#count-cells');
+  const countCells = document.querySelector("#count-cells");
   countCells.textContent = value;
 }
 
 //initialize speed generation
 function initializeSpeedRuler() {
-  const speed = document.querySelector('#showSpeed');
+  const speed = document.querySelector("#showSpeed");
   speed.innerHTML = reproductionTime;
 }
 
@@ -66,17 +66,17 @@ function updateView() {
     for (let j = 0; j < cols; j++) {
       const cell = document.getElementById(`${i}_${j}`);
       if (currentGrid[i][j] === 1) {
-        cell.classList.remove('dead');
-        cell.classList.add('alive');
-        if (currentColorCell !== '#ffffff') {
+        cell.classList.remove("dead");
+        cell.classList.add("alive");
+        if (currentColorCell !== "#ffffff") {
           cell.style.backgroundColor = currentColorCell;
         } else {
-          cell.style.backgroundColor = '';
+          cell.style.backgroundColor = "";
         }
       } else {
-        cell.classList.remove('alive');
-        cell.classList.add('dead');
-        cell.style.backgroundColor = '';
+        cell.classList.remove("alive");
+        cell.classList.add("dead");
+        cell.style.backgroundColor = "";
       }
     }
   }
@@ -84,19 +84,19 @@ function updateView() {
 
 //create grid with ID and dead class for td
 function createTable() {
-  const gridContainer = document.querySelector('#gridContainer');
+  const gridContainer = document.querySelector("#gridContainer");
 
-  const table = document.createElement('table');
-  const tbody = document.createElement('tbody');
+  const table = document.createElement("table");
+  const tbody = document.createElement("tbody");
 
   for (let i = 0; i < rows; i++) {
-    const tr = document.createElement('tr');
+    const tr = document.createElement("tr");
     for (let j = 0; j < cols; j++) {
-      const td = document.createElement('td');
-      td.setAttribute('class', 'dead');
-      td.classList.add('show-border');
-      td.setAttribute('id', `${i}_${j}`);
-      td.addEventListener('click', cellClickHandler);
+      const td = document.createElement("td");
+      td.setAttribute("class", "dead");
+      td.classList.add("show-border");
+      td.setAttribute("id", `${i}_${j}`);
+      td.addEventListener("click", cellClickHandler);
       tr.appendChild(td);
     }
     tbody.appendChild(tr);
@@ -117,36 +117,36 @@ function initialize() {
 }
 
 function setupRangeSizeRulerBtn() {
-  const sizeRuler = document.querySelector('#sizeRuler');
-  sizeRuler.setAttribute('min', MIN_SIZE);
-  sizeRuler.setAttribute('max', MAX_SIZE);
+  const sizeRuler = document.querySelector("#sizeRuler");
+  sizeRuler.setAttribute("min", MIN_SIZE);
+  sizeRuler.setAttribute("max", MAX_SIZE);
 }
 
 //setup listener all buttons menu
 function setupControlButtons() {
-  const sizeRuler = document.querySelector('#sizeRuler');
-  sizeRuler.addEventListener('click', updateGridSizeHandler);
+  const sizeRuler = document.querySelector("#sizeRuler");
+  sizeRuler.addEventListener("click", updateGridSizeHandler);
 
-  const startBtn = document.querySelector('#start-btn');
-  startBtn.addEventListener('click', startButtonHandler);
+  const startBtn = document.querySelector("#start-btn");
+  startBtn.addEventListener("click", startButtonHandler);
 
-  const clearBtn = document.querySelector('#clear-btn');
-  clearBtn.addEventListener('click', clearButtonHandler);
+  const clearBtn = document.querySelector("#clear-btn");
+  clearBtn.addEventListener("click", clearButtonHandler);
 
-  const randomBtn = document.querySelector('#random-btn');
-  randomBtn.addEventListener('click', randomButtonHandler);
+  const randomBtn = document.querySelector("#random-btn");
+  randomBtn.addEventListener("click", randomButtonHandler);
 
-  const colorCellBtn = document.querySelector('#colorCell');
-  colorCellBtn.addEventListener('change', changeColorCellHandler);
+  const colorCellBtn = document.querySelector("#colorCell");
+  colorCellBtn.addEventListener("change", changeColorCellHandler);
 
-  const spacingBorderBtn = document.querySelector('.border-spacing-btn');
-  spacingBorderBtn.addEventListener('click', borderSpacingHandler);
+  const spacingBorderBtn = document.querySelector(".border-spacing-btn");
+  spacingBorderBtn.addEventListener("click", borderSpacingHandler);
 
-  const borderStatus = document.querySelector('.border-btn');
-  borderStatus.addEventListener('click', borderStatusHandler);
+  const borderStatus = document.querySelector(".border-btn");
+  borderStatus.addEventListener("click", borderStatusHandler);
 
-  const speedRuler = document.querySelector('#speed');
-  speedRuler.addEventListener('input', speedRulerHandler);
+  const speedRuler = document.querySelector("#speed");
+  speedRuler.addEventListener("input", speedRulerHandler);
 }
 
 //update grid size with size ruler input
@@ -156,7 +156,7 @@ function updateGridSizeHandler(e) {
   cols = Math.round(newSize * 1.7);
   currentGrid = new Array(rows);
   nextGrid = new Array(rows);
-  document.querySelector('table').remove();
+  document.querySelector("table").remove();
   createTable();
   initializeGrid();
   resetGrids();
@@ -166,7 +166,7 @@ function updateGridSizeHandler(e) {
   cellsRemaining = 0;
   updateCellsRemaning(cellsRemaining);
 
-  document.querySelector('#start-btn').textContent = 'Start';
+  document.querySelector("#start-btn").textContent = "Start";
   isPlaying = false;
   isRezising = true;
   borderSpacingHandler();
@@ -174,16 +174,16 @@ function updateGridSizeHandler(e) {
 
 //start or pause iteration
 function startButtonHandler(e) {
-  const colorCellBtn = document.querySelector('#colorCell');
-  const colorPickCtn = document.querySelector('.color-pick-container');
+  const colorCellBtn = document.querySelector("#colorCell");
+  const colorPickCtn = document.querySelector(".color-pick-container");
   if (!isPlaying) {
-    e.target.textContent = 'Pause';
+    e.target.textContent = "Pause";
     isPlaying = true;
     colorCellBtn.disabled = true;
     colorPickCtn.style.opacity = 0.5;
     play();
   } else {
-    e.target.textContent = 'Continue';
+    e.target.textContent = "Continue";
     isPlaying = false;
     colorCellBtn.disabled = false;
     colorPickCtn.style.opacity = 1;
@@ -193,15 +193,15 @@ function startButtonHandler(e) {
 
 //clear & reset grid
 function clearButtonHandler() {
-  const startBtn = document.querySelector('#start-btn');
-  startBtn.textContent = 'Start';
+  const startBtn = document.querySelector("#start-btn");
+  startBtn.textContent = "Start";
   isPlaying = false;
 
-  const cellList = Array.from(document.querySelectorAll('.alive'));
+  const cellList = Array.from(document.querySelectorAll(".alive"));
   for (let i = 0; i < cellList.length; i++) {
-    cellList[i].classList.remove('alive');
-    cellList[i].classList.add('dead');
-    cellList[i].style.backgroundColor = '';
+    cellList[i].classList.remove("alive");
+    cellList[i].classList.add("dead");
+    cellList[i].style.backgroundColor = "";
   }
   resetGrids();
   generationCount = 0;
@@ -209,8 +209,8 @@ function clearButtonHandler() {
   cellsRemaining = 0;
   updateCellsRemaning(cellsRemaining);
 
-  const colorCellBtn = document.querySelector('#colorCell');
-  const colorPickCtn = document.querySelector('.color-pick-container');
+  const colorCellBtn = document.querySelector("#colorCell");
+  const colorPickCtn = document.querySelector(".color-pick-container");
   colorCellBtn.disabled = false;
   colorPickCtn.style.opacity = 1;
 }
@@ -246,57 +246,57 @@ function changeColorCellHandler(e) {
 
 //change border spacing
 function borderSpacingHandler(e) {
-  const spacingStatus = document.querySelector('#spacing-status');
-  const table = document.querySelector('table');
-  if (spacingStatus.textContent === 'ON' && isRezising === false) {
-    spacingStatus.textContent = 'OFF';
-    table.style.borderSpacing = '0';
-  } else if (spacingStatus.textContent === 'ON' && isRezising === true) {
-    table.style.borderSpacing = '2';
+  const spacingStatus = document.querySelector("#spacing-status");
+  const table = document.querySelector("table");
+  if (spacingStatus.textContent === "ON" && isRezising === false) {
+    spacingStatus.textContent = "OFF";
+    table.style.borderSpacing = "0";
+  } else if (spacingStatus.textContent === "ON" && isRezising === true) {
+    table.style.borderSpacing = "2";
     isRezising = false;
-  } else if (spacingStatus.textContent === 'OFF' && isRezising && !showBorder) {
-    table.style.borderSpacing = '0';
+  } else if (spacingStatus.textContent === "OFF" && isRezising && !showBorder) {
+    table.style.borderSpacing = "0";
     isRezising = false;
     borderStatusHandler();
-  } else if (spacingStatus.textContent === 'OFF' && isRezising) {
-    table.style.borderSpacing = '0';
+  } else if (spacingStatus.textContent === "OFF" && isRezising) {
+    table.style.borderSpacing = "0";
     isRezising = false;
   } else {
-    spacingStatus.textContent = 'ON';
-    table.style.borderSpacing = '2px';
+    spacingStatus.textContent = "ON";
+    table.style.borderSpacing = "2px";
   }
 }
 
 //toggle show grid border
 function borderStatusHandler() {
-  const borderSpacingBtn = document.querySelector('.border-spacing-btn');
+  const borderSpacingBtn = document.querySelector(".border-spacing-btn");
 
-  const borderStatus = document.querySelector('#border-status');
-  if (borderStatus.textContent === 'ON') {
+  const borderStatus = document.querySelector("#border-status");
+  if (borderStatus.textContent === "ON") {
     showBorder = false;
-    borderStatus.textContent = 'OFF';
+    borderStatus.textContent = "OFF";
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
         const cell = document.getElementById(`${i}_${j}`);
-        cell.classList.remove('show-border');
+        cell.classList.remove("show-border");
       }
     }
 
-    const spacingStatus = document.querySelector('#spacing-status');
-    const table = document.querySelector('table');
-    spacingStatus.textContent = 'OFF';
-    table.style.borderSpacing = '0';
+    const spacingStatus = document.querySelector("#spacing-status");
+    const table = document.querySelector("table");
+    spacingStatus.textContent = "OFF";
+    table.style.borderSpacing = "0";
     borderSpacingBtn.disabled = true;
     borderSpacingBtn.style.opacity = 0.5;
   } else {
     borderSpacingBtn.disabled = false;
     borderSpacingBtn.style.opacity = 1;
     showBorder = true;
-    borderStatus.textContent = 'ON';
+    borderStatus.textContent = "ON";
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
         const cell = document.getElementById(`${i}_${j}`);
-        cell.classList.add('show-border');
+        cell.classList.add("show-border");
       }
     }
   }
@@ -304,7 +304,7 @@ function borderStatusHandler() {
 
 //set the iteration speed in milliseconds
 function speedRulerHandler(e) {
-  const speedRuler = document.querySelector('#showSpeed');
+  const speedRuler = document.querySelector("#showSpeed");
   const selectedSpeed = parseInt(e.target.value);
   if (selectedSpeed === 100) {
     reproductionTime = 1000;
@@ -318,21 +318,21 @@ function speedRulerHandler(e) {
 
 //live or dead cell on click
 function cellClickHandler(e) {
-  const cellPosition = e.target.id.split('_');
+  const cellPosition = e.target.id.split("_");
   const rowPosition = cellPosition[0];
   const colPosition = cellPosition[1];
 
-  if (e.target.classList.contains('alive')) {
+  if (e.target.classList.contains("alive")) {
     currentGrid[rowPosition][colPosition] = 0;
-    e.target.classList.remove('alive');
-    e.target.classList.add('dead');
+    e.target.classList.remove("alive");
+    e.target.classList.add("dead");
 
     cellsRemaining--;
     updateCellsRemaning(cellsRemaining);
   } else {
     currentGrid[rowPosition][colPosition] = 1;
-    e.target.classList.remove('dead');
-    e.target.classList.add('alive');
+    e.target.classList.remove("dead");
+    e.target.classList.add("alive");
 
     cellsRemaining++;
     updateCellsRemaning(cellsRemaining);

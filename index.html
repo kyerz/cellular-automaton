@@ -14,7 +14,7 @@
   <body>
     <div class="wrapper">
       <div id="gridContainer" class="grid-container"></div>
-      <div>
+      <div class="cells-status">
         <div class="count-gen-wrap">
           <p>Count Generation: <span id="count-gen"></span></p>
         </div>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="menu">
-        <div class="btn-group">
+        <div class="btn-group menu-top">
           <div>
             <button id="start-btn" class="start">Start</button>
           </div>
@@ -38,34 +38,26 @@
             <button id="random-btn" class="random">Random</button>
           </div>
         </div>
+        <div class="menu-bottom">
+          <div class="grid-size">
+            <label for="sizeRuler">Grid size:</label>
+            <input type="range" id="sizeRuler" name="sizeRuler" min="10" max="20" />
+          </div>
 
-        <div class="grid-size">
-          <label for="sizeRuler">Grid size:</label>
-          <input type="range" id="sizeRuler" name="sizeRuler" min="10" max="20" />
-        </div>
-        <div class="color-pick-container">
-          <label for="">Cells color:</label>
-          <input class="color-cell-picker" id="colorCell" type="color" value="#ffffff" />
-        </div>
-        <div>
-          <button class="border-spacing-btn">
-            Border spacing: <span id="spacing-status">ON</span>
-          </button>
-        </div>
-        <div class="speed-container">
-          <button class="border-btn">Border: <span id="border-status">ON</span></button>
-        </div>
-        <div class="speed-ruler">
-          <label for="speed">Speed:</label>
-          <input
-            type="range"
-            id="speed"
-            name="speed"
-            min="100"
-            max="1000"
-            step="100"
-            value="1000"
-          />
+          <div class="color-pick-container">
+            <label for="">Cells color:</label>
+            <input class="color-cell-picker" id="colorCell" type="color" value="#ffffff" />
+          </div>
+          <div>
+            <button class="border-spacing-btn">Border spacing: <span id="spacing-status">ON</span></button>
+          </div>
+          <div class="speed-container">
+            <button class="border-btn">Border: <span id="border-status">ON</span></button>
+          </div>
+          <div class="speed-ruler">
+            <label for="speed">Speed:</label>
+            <input type="range" id="speed" name="speed" min="100" max="1000" step="100" value="1000" />
+          </div>
         </div>
       </div>
     </div>
